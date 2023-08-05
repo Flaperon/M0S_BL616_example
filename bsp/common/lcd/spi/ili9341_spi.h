@@ -32,6 +32,7 @@
 
 #define ILI9341_SPI_COLOR_DEPTH 16
 
+// Определяем тип данных - структура последовательности инициализации
 typedef struct {
     uint8_t cmd; /* 0xFF : delay(databytes)ms */
     const char *data;
@@ -40,6 +41,7 @@ typedef struct {
 
 typedef uint16_t ili9341_spi_color_t;
 
+// Перечень доступных функций для ILI9341
 int ili9341_spi_init();
 void ili9341_spi_async_callback_enable(bool enable);
 void ili9341_spi_async_callback_register(void (*callback)(void));
