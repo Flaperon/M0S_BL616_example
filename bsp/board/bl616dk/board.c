@@ -183,12 +183,12 @@ static void console_init()
     struct bflb_device_s *gpio;
 
     gpio = bflb_device_get_by_name("gpio");
-    bflb_gpio_uart_init(gpio, GPIO_PIN_21, GPIO_UART_FUNC_UART0_TX); // M0S Dock
-    bflb_gpio_uart_init(gpio, GPIO_PIN_22, GPIO_UART_FUNC_UART0_RX); // M0S Dock
+    bflb_gpio_uart_init(gpio, GPIO_PIN_21, GPIO_UART_FUNC_UART0_TX);
+    bflb_gpio_uart_init(gpio, GPIO_PIN_22, GPIO_UART_FUNC_UART0_RX);
 
     struct bflb_uart_config_s cfg;
-    cfg.baudrate = 2000000;
-    //cfg.baudrate = 115200;
+    //cfg.baudrate = 2000000;
+    cfg.baudrate = 115200;
     cfg.data_bits = UART_DATA_BITS_8;
     cfg.stop_bits = UART_STOP_BITS_1;
     cfg.parity = UART_PARITY_NONE;
@@ -209,7 +209,7 @@ void board_init(void)
 
     flag = bflb_irq_save();
 
-    // ret = bflb_flash_init();
+    ret = bflb_flash_init();
 
     system_clock_init();
     peripheral_clock_init();
@@ -252,10 +252,10 @@ void board_uartx_gpio_init()
 
     gpio = bflb_device_get_by_name("gpio");
 
-    //bflb_gpio_uart_init(gpio, GPIO_PIN_23, GPIO_UART_FUNC_UART1_TX);
-    bflb_gpio_uart_init(gpio, GPIO_PIN_21, GPIO_UART_FUNC_UART1_TX); // M0S Dock
-    //bflb_gpio_uart_init(gpio, GPIO_PIN_24, GPIO_UART_FUNC_UART1_RX);
-    bflb_gpio_uart_init(gpio, GPIO_PIN_22, GPIO_UART_FUNC_UART1_RX); // M0S Dock
+    bflb_gpio_uart_init(gpio, GPIO_PIN_23, GPIO_UART_FUNC_UART1_TX);
+    //bflb_gpio_uart_init(gpio, GPIO_PIN_21, GPIO_UART_FUNC_UART1_TX); //
+    bflb_gpio_uart_init(gpio, GPIO_PIN_24, GPIO_UART_FUNC_UART1_RX);
+    //bflb_gpio_uart_init(gpio, GPIO_PIN_22, GPIO_UART_FUNC_UART1_RX); //
     bflb_gpio_uart_init(gpio, GPIO_PIN_25, GPIO_UART_FUNC_UART1_CTS);
     bflb_gpio_uart_init(gpio, GPIO_PIN_26, GPIO_UART_FUNC_UART1_RTS);
 }
@@ -267,8 +267,10 @@ void board_i2c0_gpio_init()
     gpio = bflb_device_get_by_name("gpio");
     /* I2C0_SDA */
     bflb_gpio_init(gpio, GPIO_PIN_11, GPIO_FUNC_I2C0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_1);
+    //bflb_gpio_init(gpio, GPIO_PIN_1, GPIO_FUNC_I2C0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_1);
     /* I2C0_SCL */
     bflb_gpio_init(gpio, GPIO_PIN_14, GPIO_FUNC_I2C0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_1);
+    //bflb_gpio_init(gpio, GPIO_PIN_0, GPIO_FUNC_I2C0 | GPIO_ALTERNATE | GPIO_PULLUP | GPIO_SMT_EN | GPIO_DRV_1);
 }
 
 void board_spi0_gpio_init()

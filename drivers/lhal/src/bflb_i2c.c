@@ -408,7 +408,8 @@ int bflb_i2c_transfer(struct bflb_device_s *dev, struct bflb_i2c_msg_s *msgs, in
         }
     }
 
-    return 0;
+    //return 0;
+    return ret;
 }
 
 void bflb_i2c_int_mask(struct bflb_device_s *dev, uint32_t int_type, bool mask)
