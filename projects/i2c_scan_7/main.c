@@ -5,6 +5,7 @@
 static struct bflb_device_s *i2c0;
 
 int i2c_addr;
+int err = 2;
 uint8_t write_data[3];
 
 int main(void)
@@ -25,19 +26,19 @@ int main(void)
 
     //for (size_t i = 0; i < 120; i++)
     //{
-        msgs[0].addr = 0x3C;
+        msgs[0].addr = 0x3D;
         msgs[0].flags = 0;
         msgs[0].buffer = write_data;
         msgs[0].length = 2;
 
-        /*msgs[1].addr = 0x3C;
+        msgs[1].addr = 0x3C;
         msgs[1].flags = 0;
         msgs[1].buffer = write_data;
-        msgs[1].length = 3;*/
+        msgs[1].length = 3;
 
-        int err = bflb_i2c_transfer(i2c0, msgs, 1);
+        err = bflb_i2c_transfer(i2c0, msgs, 2);
 
-        printf("Return = %d\r\n", err);
+        printf("%d", err);
 
         //bflb_mtimer_delay_ms(100);
         
