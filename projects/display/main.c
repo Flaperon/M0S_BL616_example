@@ -11,9 +11,11 @@ int main(void)
     
     lcd_clear(BLACK);
     lcd_set_dir(0,0);
-    lcd_draw_str_ascii16(10,10,WHITE,BLACK,STRING1,strlen(STRING1));
+    //lcd_draw_str_ascii16(10,10,WHITE,BLACK,STRING1,strlen(STRING1));
+    lcd_draw_rectangle(0,0,159,127,WHITE);
     
     while (1) {
         
     }
 }
+ 
