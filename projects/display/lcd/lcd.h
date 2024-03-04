@@ -135,7 +135,19 @@
 #define YELLOW 0xFFE0
 #define ORANGE 0xFC00
 
+#elif defined LCD_SPI_ST7567
+
+#include "spi/st7567_spi.h"
+#define LCD_INTERFACE_TYPE           LCD_INTERFACE_SPI
+#define LCD_W                        ST7567_SPI_W
+#define LCD_H                        ST7567_SPI_H
+#define LCD_COLOR_DEPTH              ST7567_SPI_COLOR_DEPTH
+#define _LCD_FUNC_DEFINE(_func, ...) st7567_spi_##_func(__VA_ARGS__)
+#define BLACK 0x0000
+#define WHITE 0xFFFF
+
 #elif defined LCD_SPI_ST7735
+
 #include "spi/st7735_spi.h"
 #define LCD_INTERFACE_TYPE           LCD_INTERFACE_SPI
 #define LCD_W                        ST7735_SPI_W

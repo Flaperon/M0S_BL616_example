@@ -137,6 +137,47 @@ const st7735_spi_init_cmd_t st7735_spi_init_cmds[] = {
 };
 #endif
 
+#if defined ST7735_80_160
+const st7735_spi_init_cmd_t st7735_spi_init_cmds[] = {
+    { 0x01, NULL, 0 }, /* Software reset*/
+    { 0xFF, NULL, 150 },
+    { 0x11, NULL, 0 }, /* Exit sleep */
+    { 0xFF, NULL, 255 },
+
+    { 0xB1, "\x01\x2C\x2D", 3 }, /* Framerate ctrl - normal mode */
+    { 0xB2, "\x01\x2C\x2D", 3 }, /* Framerate ctrl - idle mode */
+    { 0xB3, "\x01\x2C\x2D\x01\x2C\x2D", 6 }, /* Framerate - partial mode */
+    { 0xB4, "\x07", 1 }, /* Display inversion ctrl */
+
+    { 0xC0, "\xA2\x02\x84", 3 }, /* Power control */
+    { 0xC1, "\xC5", 1 }, /* Power control */
+    { 0xC2, "\x0A\x00", 2 }, /* Power control */
+    { 0xC3, "\x8A\x2A", 2 }, /* Power control */
+    { 0xC4, "\x8A\xEE", 2 }, /* Power control */
+    { 0xC5, "\x0E", 1 }, /* Power control */
+
+    { 0x20, NULL, 0 }, /* Don't invert display */
+
+    { 0x36, "\xC8", 1 }, /* Mem access ctl (directions) */
+
+    { 0x3A, "\x05", 1 }, /* Set color mode: 16 bit color*/
+
+    /* Part 2 - Specific for 160x80 plugin*/
+    { 0x21, NULL, 0 }, /* Invert display */
+    { 0x2A, "\x00\x00\x00\x4F", 4 }, /* Column addr set (0-79) */
+    { 0x2B, "\x00\x00\x00\x9F", 4 }, /* Row addr set (0-159) */
+
+    /* Part 3 */
+    { 0xE0, "\x02\x1C\x07\x12\x37\x32\x29\x2D\x29\x25\x2B\x39\x00\x01\x03\x10", 16 },
+    { 0xE1, "\x03\x1D\x07\x06\x2E\x2C\x29\x2D\x2E\x2E\x37\x3F\x00\x00\x02\x10", 16 },
+
+    { 0x13, NULL, 0 }, /* Normal display on */
+    { 0xFF, NULL, 10 },
+    { 0x29, NULL, 0 }, /* Main screen turn on */
+    { 0xFF, NULL, 100 },
+};
+#endif
+
 /**
  * @brief st7735_spi_async_callback_enable
  *

@@ -19,14 +19,18 @@
   spi interface
     LCD_SPI_ILI9488
     LCD_SPI_ILI9341
+    LCD_SPI_ST7567
     LCD_SPI_ST7735
     LCD_SPI_ST7796
     LCD_SPI_ST7789V
 */
+
+#define LCD_SPI_ST7567
 //#define LCD_SPI_ST7796
 //#define LCD_SPI_ILI9341
-#define LCD_SPI_ST7735
-#define ST7735_GREENTAB
+//#define LCD_SPI_ST7735
+//#define ST7735_GREENTAB
+//#define ST7735_80_160
 
 /* dbi ili9488 config */
 #if defined LCD_DBI_ILI9488
@@ -251,6 +255,36 @@
     */
    #define ILI341_SPI_COLOR_REVERSAL 0
 
+#elif defined LCD_SPI_ST7567
+    /* Selecting interface type, more configuration of peripherals comes later
+        1: SPI peripheral, supported functions: spi-4wire,
+    */
+    #define LCD_SPI_INTERFACE_TYPE 1
+
+    /* Selecting pixel format
+        1: rgb565
+    */
+    #define ST7567_SPI_PIXEL_FORMAT 1
+
+    /* enable the lcd reset function
+        0: Does not care about lcd hard reset
+        1: use gpio to reset the lcd
+    */
+    #define LCD_RESET_EN 1
+
+    /* LCD width and height */
+    #define ST7567_SPI_W 128
+    #define ST7567_SPI_H 64
+
+    /* The offset of the area can be displayed */
+    #define ST7567_SPI_OFFSET_X 0
+    #define ST7567_SPI_OFFSET_Y 0
+
+    /* Color reversal, Some screens are required
+        0: disable
+        1: enable
+    */
+   #define ST7567_SPI_COLOR_REVERSAL 0
 
 /* spi st7789v config */
 #elif defined LCD_SPI_ST7789V
@@ -279,7 +313,7 @@
     #define ST7789V_SPI_OFFSET_X 0
     #define ST7789V_SPI_OFFSET_Y 0
 
-/* spi st7796 config */
+/* spi st7735 config */
 #elif defined LCD_SPI_ST7735
 
     /* Selecting interface type, more configuration of peripherals comes later
@@ -299,12 +333,22 @@
     #define LCD_RESET_EN 1
 
     /* LCD width and height */
-    #define ST7735_SPI_W 160
-    #define ST7735_SPI_H 128
+    #if defined ST7735_80_160
+        #define ST7735_SPI_W 80
+        #define ST7735_SPI_H 160
+    #else
+        #define ST7735_SPI_W 128
+        #define ST7735_SPI_H 160
+    #endif
 
     /* The offset of the area can be displayed */
-    #define ST7735_SPI_OFFSET_X 0
-    #define ST7735_SPI_OFFSET_Y 0
+    #if defined ST7735_80_160
+        #define ST7735_SPI_OFFSET_X 26
+        #define ST7735_SPI_OFFSET_Y 1
+    #else
+        #define ST7735_SPI_OFFSET_X 0
+        #define ST7735_SPI_OFFSET_Y 0
+    #endif
 
     /* Color reversal, Some screens are required
         0: disable

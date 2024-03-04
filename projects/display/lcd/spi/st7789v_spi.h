@@ -1,5 +1,5 @@
 /**
- * @file st7789v.h
+ * @file st7789v_spi.h
  * @brief
  *
  * Copyright (c) 2021 Bouffalolab team
